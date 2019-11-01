@@ -6,7 +6,6 @@
 .shopname{
   margin-left: 20rpx;
   width: 90%;
-  height: 60rpx;
   padding-top: 40rpx;
   font-size: 32rpx;
   align-items: center;

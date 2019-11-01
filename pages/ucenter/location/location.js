@@ -70,9 +70,9 @@ function fill_zero_prefix(num) {
 Page({
   data: {
     clock: '',
-    isLocation:false,
-    tglatitude: 36.5424600000,
-    tglongitude: 115.2785000000,
+    isLocation: false,
+    tglatitude: 23.194466,
+    tglongitude: 113.270768,
     latitude: 0,
     longitude: 0,
     markers: [],
