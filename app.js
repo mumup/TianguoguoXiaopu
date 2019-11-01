@@ -95,7 +95,7 @@ App({
     if (categoryId == 0) {
       categoryId = "";
     }
-    console.log(categoryId)
+
     var that = this;
     wx.request({
       url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
@@ -124,10 +124,6 @@ App({
           goods.push(temp);
         }
 
-
-        console.log('goods----------------------')
-        console.log(goods)
-
         var goodsName = []; //获取全部商品名称，做为智能联想输入库
         for (var i = 0; i < goods.length; i++) {
           goodsName.push(goods[i].name);
@@ -143,9 +139,7 @@ App({
           
         }
         that.globalData.goods = goods
-        console.log('getGoodsReputation----------------------')
-        console.log(that.globalData.goods)
-
+        console.log(that)
 
         wx.request({
           url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
@@ -177,17 +171,11 @@ App({
                 that.globalData.activeCategoryId = categories[i].id  
               }
               goodsList.push({ 'id': id, 'key': key, 'name': name, 'type': typeStr, 'goods': goodsTemp })
-              console.log("你好," + categories[i].name)
             }
 
             that.globalData.goodsList = goodsList
             that.globalData.onLoadStatus = true
-            console.log('categories:',categories)
             //that.globalData.activeCategoryId = categories[0].id   改为第一个不为null的类
-            
-
-            console.log('getGoodsList----------------------')
-            console.log(that.globalData.goodsList)
           },
           fail: function () {
             that.globalData.onLoadStatus = false
@@ -219,7 +207,7 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    subDomain: "tggtest",// 商城后台个性域名tgg
+    subDomain: "ad7a0080441d00a8289cb7d10ca5bfbe",// 商城后台个性域名tgg
     version: "2.0.6",
     shareProfile: '   一流的服务，做超新鲜的水果' // 首页转发的时候术语
   }

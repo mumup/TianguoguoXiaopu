@@ -1,4 +1,5 @@
 var app = getApp();
+console.log(111)
 var starscore = require("../../templates/starscore/starscore.js");
 //var server = require('../../utils/server');
 Page(Object.assign({},{
@@ -36,10 +37,12 @@ Page(Object.assign({},{
   },
   onLoad: function (options) {
     var that = this
+    console.log(that)
     
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
     })
+    
     that.setData({
       categories: app.globalData.categories,
       goods: app.globalData.goods,
@@ -57,7 +60,6 @@ Page(Object.assign({},{
           classifyViewed: that.data.categories[i].id,
           scrolltop: 0,
           goodsListCurrent: that.data.goodsList[i],
-          
         })
       }
     }
@@ -169,7 +171,6 @@ Page(Object.assign({},{
           onLoadStatus: false,
         })
         wx.hideLoading()
-        console.log('11')
       }
     })
   },
@@ -177,7 +178,6 @@ Page(Object.assign({},{
     if (categoryId == 0) {
       categoryId = "";
     }
-    console.log(categoryId)
     var that = this;
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
@@ -205,10 +205,6 @@ Page(Object.assign({},{
           goods.push(res.data.data[i]);
         }
 
-
-        console.log('getGoods----------------------')
-        console.log(goods)
-
         var page = that.data.page;
         var pageSize = that.data.pageSize;
         for (let i = 0; i < goods.length; i++) {
@@ -219,9 +215,6 @@ Page(Object.assign({},{
         that.setData({
           goods: goods,
         });
-        console.log('getGoodsReputation----------------------')
-        console.log(goods)
-
 
         wx.request({
           url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
@@ -248,10 +241,8 @@ Page(Object.assign({},{
                 }
               }
               goodsList.push({ 'id': id, 'key': key, 'name': name, 'goods': goodsTemp })
-              console.log("你好," + categories[i].name)
             }
 
-            console.log(goodsList, 'womendeshijie')
             for (var i = 0; i < goodsList.length; i++) {
               if (goodsList[i].goods.length === 0) {
                 continue;
@@ -274,8 +265,6 @@ Page(Object.assign({},{
               }
             }
 
-            console.log('getGoodsList----------------------')
-            console.log(that.data.goodsList)
             that.setData({
               loadingStatus: false,
               loadingFinish: true

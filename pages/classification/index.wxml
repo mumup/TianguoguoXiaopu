@@ -1,4 +1,3 @@
-
 <view class="container">
   <view class="header" style='background: -webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.5))'>
     <view class='shop-Info'>
@@ -25,7 +24,12 @@
     <wxc-toast is-show="{{loadingFinish}}" icon="yes" icon-color="#FF0077" text="所有商品加载完成"> </wxc-toast>
 
     <scroll-view class="classify-container" scroll-y="true" scroll-with-animation="true">
-      <view class="classify {{classifyViewed==classify.id?'active':''}}" wx:for="{{categories}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
+      <view class="classify {{classifyViewed === classify.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:for-item="classify" 
+            wx:key="id" 
+            data-id="{{classify.id}}" 
+            bindtap="tapClassify">
         <view class="name {{classifyViewed==classify.id?'active':''}}">{{classify.name}}</view>
       </view>
     </scroll-view>
