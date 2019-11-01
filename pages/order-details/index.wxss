@@ -10,6 +10,7 @@ page{
 .sec-wrap{
     background-color: #fff;
     margin-top: 20rpx;
+    width: 100%;
 }
 .bottom-fiexd{
   position: fixed;
