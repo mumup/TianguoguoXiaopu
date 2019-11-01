@@ -1,6 +1,10 @@
 export default Component({
   behaviors: [],
   properties: {
+    maskOptions: {
+      type: Object,
+      value: {}
+    },
     locked: {
       type: String,
       value: "hide"
@@ -91,6 +95,8 @@ export default Component({
     popupTap() {
       if (this.data.locked !== 'true') {
         this.hide();
+
+        this.triggerEvent('popuptap', {}, {});
       }
     },
     hide() {

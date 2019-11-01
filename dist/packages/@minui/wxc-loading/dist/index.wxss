@@ -1,4 +1,3 @@
-
 @keyframes loadingRotate {
     0% {
       transform: rotate(0);

@@ -23,5 +23,11 @@ export default Component({
     }
   },
   data: {},
-  methods: {}
+  methods: {
+    onClick(event) {
+      let detail = event.detail;
+      let option = {};
+      this.triggerEvent('click', detail, option);
+    }
+  }
 });
