@@ -20,11 +20,19 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.1",
+	"libVersion": "2.0.4",
 	"appid": "wx9141ed0b4707638a",
 	"projectname": "tgg",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"packOptions": {
+		"ignore": [
+			{
+				"type": "folder",
+				"value": ".history"
+			}
+		]
+	},
 	"condition": {
 		"search": {
 			"current": -1,

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "珍馨位置"
+    "navigationBarTitleText": "珍馨位置",
+    "usingComponents": {
+        "wxc-button": "../../../dist/packages/@minui/wxc-button/dist/index"
+    }
 }

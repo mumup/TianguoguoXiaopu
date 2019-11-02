@@ -28,13 +28,13 @@ Page({
       bgGreen: app.globalData.bgGreen,
       bgBlue: app.globalData.bgBlue
     })
-
-    let userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
-      wx.navigateTo({
-        url: "/pages/authorize/index"
-      })
-    }
+    // let userInfo = wx.getStorageSync('userInfo')
+    // console.log(userInfo)
+    // if (!userInfo) {
+    //   wx.navigateTo({
+    //     url: "/pages/authorize/index"
+    //   })
+    // }
   },
   onShow() {
     var that = this;

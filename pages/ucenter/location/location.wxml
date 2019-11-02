@@ -1,15 +1,15 @@
-<view class='shopInfo'>
-  <view class='shopname'>
+<view class="shopInfo">
+  <view class="shopname">
     珍馨果园：广州市白云区云城街萧岗九石岭南路7号101铺
   </view>
-  <view style='margin-left: 20rpx; width: 90%; height: 50rpx; font-size: 28rpx; align-items: center;'>
+  <view class="tips">
     (可直接在"我的"-->"客服电话"里联系店家)
   </view>
 </view>
 <view class="mainView">
    <map
         class="mapView"
-        style="width: 100%; height: 375px;"
+        style="width: 100%; height: 860rpx;"
         latitude="{{latitude}}"
         longitude="{{longitude}}"
         markers="{{markers}}"
@@ -19,12 +19,12 @@
     </map>
 </view>
 
-<view class="head" style="flex-direction:row;">
+<view class="head" style="flex-direction:row;text-align: center;">
     <view class='distanceTxt'>
       <image class="icon" src="/images/more/run.png" mode="aspectFill" style='width:50rpx;height:30rpx;margin-right:20rpx;margin-top:8rpx;'></image>
       <text>距离我约：{{meters}}km</text>
     </view>
-    <button bindtap="openTgLocation" style='width:200rpx;margin-top:30rpx;'>导航</button>
+    <wxc-button type="success" size="small" btn-style='margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;' bindtap="openTgLocation" value="导航"></wxc-button>
 </view>
 
 

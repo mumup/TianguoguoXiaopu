@@ -7,87 +7,19 @@ page {
   justify-content: initial;
 }
 
-.form-box {
-  width: 100%;
-  background-color: #fff;
-  margin-top: 20rpx;
+.logo {
+  display: block;
+	width: 160rpx;
+	height: 160rpx;
+  margin: 0 auto 40rpx;
 }
 
-.row-wrap {
-  width: 720rpx;
-  height: 88rpx;
-  line-height: 88rpx;
-  margin-left: 30rpx;
-  border-bottom: 1rpx solid #eee;
-  display: flex;
-  font-size: 28rpx;
-  /*justify-content: space-between;*/
+.my-content {
+  text-align: center;
+  padding: 40rpx;
 }
 
-.row-wrap .label {
-  width: 160rpx;
-  color: #000;
-}
-
-.row-wrap .label-right {
-  flex: 1;
-  height: 88rpx;
-  line-height: 88rpx;
-}
-
-.row-wrap .label-right input {
-  height: 100%;
-  font-size: 28rpx;
-  padding-right: 30rpx;
-}
-
-.row-wrap .right-box {
-  margin-right: 30rpx;
-}
-
-.arrow-right {
-  width: 15rpx;
-  height: 24rpx;
-}
-
-.agree-btn {
-  margin-top: 50rpx;
-  color: #000;
-}
-
-.reject-btn {
-  margin-top: 180rpx;
-  background-color: #ff5777;
-  color: #fff;
-}
-
-.addr-details {
-  height: auto;
-  padding: 30rpx 0;
-  margin-left: 30rpx;
-  border-bottom: 1rpx solid #eee;
-  display: flex;
-  font-size: 28rpx;
-}
-
-.addr-details .label {
-  margin: auto 0 auto 0;
-  width: 160rpx;
-  color: #000;
-}
-
-.addr-details textarea {
-  box-sizing: border-box;
-  width: 480rpx;
-  overflow: scroll;
-}
-
-picker {
-  min-width: 20rpx;
-  height: 100%;
-  margin-right: 20rpx;
-}
-
-.hui {
-  color: #777;
+.tips {
+  font-size: 30rpx;
+  text-align: left;
 }
