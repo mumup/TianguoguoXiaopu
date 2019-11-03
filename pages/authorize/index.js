@@ -1,5 +1,7 @@
 // pages/authorize/index.js
 var app = getApp();
+const util = require('../../utils/util.js');
+
 Page({
 
   /**
@@ -79,6 +81,9 @@ Page({
   login: function () {
     let that = this;
     let token = wx.getStorageSync('token');
+    wx.showLoading({
+      title: '登录中'
+    });
     if (token) {
       wx.request({
         url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/check-token',
@@ -87,9 +92,10 @@ Page({
         },
         success: function (res) {
           if (res.data.code != 0) {
-            wx.removeStorageSync('token')
+            wx.removeStorageSync('token');
             that.login();
           } else {
+            wx.hideLoading();
             // 回到原来的地方放
             wx.navigateBack();
           }
@@ -125,6 +131,10 @@ Page({
             wx.setStorageSync('uid', res.data.data.uid)
             // 回到原来的页面
             wx.navigateBack();
+            wx.hideLoading();
+          },
+          fail: function () {
+            wx.hideLoading();
           }
         })
       }
@@ -144,12 +154,14 @@ Page({
               url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/register/complex',
               data: { code: code, encryptedData: encryptedData, iv: iv }, // 设置请求的 参数
               success: (res) => {
-                wx.hideLoading();
                 that.login();
               }
             })
           }
         })
+      },
+      fail: function () {
+        wx.hideLoading();
       }
     })
   }

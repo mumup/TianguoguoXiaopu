@@ -1,4 +1,5 @@
 const app = getApp()
+const util = require('../../../utils/util.js');
 
 Page({
   data: {
@@ -10,7 +11,8 @@ Page({
     score: 0,
     score_sign_continuous: 0,
     iconSize: 45,
-    iconColor: '#999999'
+    iconColor: '#999999',
+    notLogin: false
   },
   onPullDownRefresh: function () {
     var that = this
@@ -28,29 +30,30 @@ Page({
       bgGreen: app.globalData.bgGreen,
       bgBlue: app.globalData.bgBlue
     })
-    // let userInfo = wx.getStorageSync('userInfo')
-    // console.log(userInfo)
-    // if (!userInfo) {
-    //   wx.navigateTo({
-    //     url: "/pages/authorize/index"
-    //   })
-    // }
   },
   onShow() {
     var that = this;
-    that.getUserApiInfo();
-    that.getUserAmount();
-    that.checkScoreSign();
+    util.checkHasLogined().then(() => {
+      that.setData({
+        notLogin: false
+      })
+      var userInfo = wx.getStorageSync('userInfo')
+      if (userInfo) {
+        that.setData({
+          userInfo: userInfo,
+        })
+      }
+      that.getUserApiInfo();
+      that.getUserAmount();
+      that.checkScoreSign();
+    }).catch(() => {
+      util.loginOut();
+      that.setData({
+        notLogin: true
+      })
+    })
     that.getAboutUs();
     that.getservicePhoneNumber();
-
-    var userInfo = wx.getStorageSync('userInfo')
-    if (userInfo) {
-      that.setData({
-        userInfo: userInfo,
-      })
-    }
-    
   },
   aboutUs: function () {
     var that = this
@@ -61,18 +64,8 @@ Page({
     })
   },
   makePhoneCall: function () {
-    var that = this;
     wx.makePhoneCall({
-      phoneNumber: that.data.servicePhoneNumber,
-      success: function (res) { },
-      fail: function (res) {
-        wx.showModal({
-          title: '呼叫失败',
-          content: '请稍后再试',
-          showCancel: false,
-        })
-      },
-      complete: function (res) { },
+      phoneNumber: this.data.servicePhoneNumber
     })
   },
   getPhoneNumber: function (e) {
@@ -122,7 +115,7 @@ Page({
         if (res.data.code == 0) {
           that.setData({
             apiUserInfoMap: res.data.data,
-            userMobile: res.data.data.base.mobile
+            userMobile: res.data.data.base.mobile || ''
           });
         }
       }
@@ -214,6 +207,9 @@ Page({
   },
   scoresign: function () {
     var that = this;
+    this.data.notLogin ?  wx.navigateTo({
+      url: "/pages/authorize/index"
+    }) :
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/sign',
       data: {
@@ -237,16 +233,21 @@ Page({
     wx.navigateTo({
      url: "/pages/authorize/index"
     })
-    this.onLoad()
   },
   recharge: function () {
     wx.navigateTo({
-      url: "/pages/recharge/index"
+      url: this.data.notLogin ? "/pages/authorize/index" : "/pages/recharge/index"
     })
   },
   withdraw: function () {
     wx.navigateTo({
-      url: "/pages/withdraw/index"
+      url: this.data.notLogin ? "/pages/authorize/index" : "/pages/withdraw/index"
+    })
+  },
+  goPage(e) {
+    var url = this.data.notLogin ? "/pages/authorize/index" : e.currentTarget.dataset.url;
+    wx.navigateTo({
+      url: url
     })
   }
 })

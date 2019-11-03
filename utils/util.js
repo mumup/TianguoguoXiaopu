@@ -155,8 +155,41 @@ function showErrorToast(msg) {
   })
 }
 
+function checkHasLogined() {
+  return new Promise(function (resolve, reject) {
+    const token = wx.getStorageSync('token');
+    if (!token) {
+      loginOut();
+      return reject(false);
+    }
+    wx.request({
+      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/check-token',
+      data: {
+        token: token
+      },
+      success: function (res) {
+        if (res.data.code != 0) {
+          loginOut();
+          return reject(false);
+        } else {
+          return resolve(true);
+        }
+      }
+    })
+  })
+}
+
+function loginOut(){
+  wx.removeStorageSync('token')
+  wx.removeStorageSync('uid')
+  wx.removeStorageSync('userInfo')
+}
+
+
 module.exports = {
   formatTime: formatTime,
+  checkHasLogined,
+  loginOut,
   request,
   redirect,
   showErrorToast,
