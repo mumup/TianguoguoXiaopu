@@ -143,8 +143,8 @@ page {
   float: left;
   width: 249rpx;
   height: 167.5rpx;/*187.5*/
-  border-top: 1px solid #EFEFEF; 
   border-right: 1px solid #EFEFEF;
+  border-bottom: 1px solid #EFEFEF;
   text-align: center;
 }
 

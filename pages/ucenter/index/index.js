@@ -12,7 +12,7 @@ Page({
     score_sign_continuous: 0,
     iconSize: 45,
     iconColor: '#999999',
-    notLogin: false
+    notLogin: true
   },
   onPullDownRefresh: function () {
     var that = this
@@ -238,7 +238,11 @@ Page({
           util.loginOut();
           that.setData({
             userInfo: null,
-            notLogin: true
+            notLogin: true,
+            balance: 0,
+            freeze: 0,
+            score: 0,
+            score_sign_continuous: 0
           })
         }
       }

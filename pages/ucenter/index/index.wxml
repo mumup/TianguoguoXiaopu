@@ -7,12 +7,12 @@
         <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
         <view style="height:10rpx;"></view>
         <!-- 部分未通过认证的开发者无权限获得用户绑定电话信息，故暂时隐藏此功能。具体可见微信官方https://developers.weixin.qq.com/miniprogram/dev/api/getPhoneNumber.html -->
-        <!--<wxc-label wx:if="{{userMobile}}" class="phoneNumber" type="fill" type-color="#747ba1">
+        <wxc-label wx:if="{{userMobile}}" class="phoneNumber" type="fill" type-color="#747ba1">
             {{userMobile}}
-          </wxc-label>
-          <button wx:else class="pin-phoneNumber" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="min">
-            点击绑定手机号码
-          </button>-->
+        </wxc-label>
+        <button wx:else class="pin-phoneNumber" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="min">
+          点击绑定手机号码
+        </button>
       </view>
 
     </view>
@@ -70,7 +70,7 @@
         <text class="txt">收货地址</text>
       </view>
     </view>
-    <view class="item no-border-right">
+    <view class="item">
       <view data-url="/pages/ucenter/location/location" class="a" bindtap="goPage">
         <wxc-icon type="location" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">到店里</text>
@@ -100,19 +100,19 @@
         <text class="txt">联系客服</text>
       </view>
     </view>
-    <view class="item no-border-bottom">
+    <view class="item">
       <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
         <wxc-icon type="comment" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">意见反馈</text>
       </navigator>
     </view>
-    <view class="item item-bottom" bindtap="aboutUs">
+    <view class="item" bindtap="aboutUs">
       <view class="a">
         <wxc-icon type="help" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">关于我们</text>
       </view>
     </view>
-    <view class="item item-bottom" bindtap="loginOut" wx:if="{{!notLogin}}">
+    <view class="item" bindtap="loginOut" wx:if="{{!notLogin}}">
       <view class="a">
         <wxc-icon type="warning" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">退出登录</text>
