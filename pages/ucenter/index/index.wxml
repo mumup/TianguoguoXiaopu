@@ -82,7 +82,7 @@
         <text class="txt">优惠券</text>
       </view>
     </view>
-    <view class="item">
+    <!-- <view class="item">
       <navigator url="" hover-class="none" class="a">
         <wxc-icon type='rate' size='{{iconSize}}' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>积分兑换</text>
@@ -93,17 +93,11 @@
         <wxc-icon type='footprint' size='{{iconSize}}' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt" style='color:lightgray;text-decoration: line-through;'>足迹</text>
       </navigator>
-    </view>
-    <view class="item item-bottom" bindtap='makePhoneCall'>
+    </view> -->
+    <view class="item" bindtap='makePhoneCall'>
       <view class="a">
         <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">联系客服</text>
-      </view>
-    </view>
-    <view class="item item-bottom" bindtap="aboutUs">
-      <view class="a">
-        <wxc-icon type="help" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
-        <text class="txt">关于我们</text>
       </view>
     </view>
     <view class="item no-border-bottom">
@@ -112,9 +106,21 @@
         <text class="txt">意见反馈</text>
       </navigator>
     </view>
+    <view class="item item-bottom" bindtap="aboutUs">
+      <view class="a">
+        <wxc-icon type="help" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
+        <text class="txt">关于我们</text>
+      </view>
+    </view>
+    <view class="item item-bottom" bindtap="loginOut" wx:if="{{!notLogin}}">
+      <view class="a">
+        <wxc-icon type="warning" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
+        <text class="txt">退出登录</text>
+      </view>
+    </view>
+    
   </view>
-  <view style="height:20rpx;width:100%;"></view>
-  <view class="my-item" style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
+  <view class="my-item" wx:if="{{!notLogin}}" style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
     <wxc-button type="danger" value="重新授权登录" bindclick="relogin"></wxc-button>
   </view>
 

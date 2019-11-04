@@ -21,7 +21,6 @@
 <view style='height:100rpx;'></view>
 
 <view class="content">
-
   <view class="success-view" wx:if="{{load_statue}}">
     <view class="goods-container">
       <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="toDetailsTap">
@@ -36,5 +35,4 @@
   </view>
 
   <wxc-abnor type='REQUEST_ERROR' bind:abnortap="refreshGoodsList" wx:else></wxc-abnor>
-
 </view>

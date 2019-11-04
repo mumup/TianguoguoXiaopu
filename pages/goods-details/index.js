@@ -2,6 +2,7 @@
 //获取应用实例
 var app = getApp();
 var WxParse = require('../../templates/wxParse/wxParse.js');
+const util = require('../../utils/util.js');
 
 Page({
   data: {
@@ -25,6 +26,7 @@ Page({
     canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
     shopCarInfo: {},
     shopType: "addShopCar",//购物类型，加入购物车或立即购买，默认为加入购物车
+    notLogin: false
   },
 
   //事件处理函数
@@ -32,6 +34,18 @@ Page({
     //console.log(e.detail.current)
     this.setData({
       swiperCurrent: e.detail.current
+    })
+  },
+  onShow: function () {
+    util.checkHasLogined().then(() => {
+      this.setData({
+        notLogin: false
+      })
+    }).catch(() => {
+      util.loginOut();
+      this.setData({
+        notLogin: true
+      })
     })
   },
   onLoad: function (e) {
@@ -261,6 +275,12 @@ Page({
 	  * 立即购买
 	  */
   buyNow: function () {
+    if (this.data.notLogin) {
+      wx.navigateTo({
+        url: "/pages/authorize/index"
+      })
+      return;
+    }
     if (this.data.goodsDetail.properties && !this.data.canSubmit) {
       if (!this.data.canSubmit) {
         wx.showModal({

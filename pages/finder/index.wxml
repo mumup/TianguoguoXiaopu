@@ -17,8 +17,6 @@
     <template is="wxSearch" data="{{wxSearchData}}" />
   </view>
 
-  <view style='height:100rpx;'></view>
-
   <view wx:if='{{!hasNoCoupons}}' class="introduced">
     <wxc-loadmore class='introduced-text' is-end="{{true}}" text="店铺优惠券"></wxc-loadmore>
     <!--<image class="introudced-img" src="{{couponsTitlePicStr}}"></image>-->
@@ -29,24 +27,29 @@
     <wxc-toast wx:if="{{couponsStatus===0}}" is-show="{{true}}" text="优惠券加载中···"></wxc-toast>
     <wxc-toast wx:elif="{{couponsStatus===1}}" is-show="{{true}}" text="加载成功" icon="yes"></wxc-toast>
     <wxc-toast wx:elif="{{couponsStatus===2}}" is-show="{{true}}" text="暂无优惠券可领" icon="no"></wxc-toast>
-    <view class="coupons-item" wx:for-items="{{coupons}}" wx:for-index="idx" wx:key="id" bindtap="gitCoupon" data-id="{{item.id}}">
-      <view class='coupons-date-money'>
-        <view class='coupons-info'>
-          <text style='font-size:24rpx;'> 满 </text>
-          <text style='font-size:28rpx;font-weight: bolder;color:#353535;'>{{item.moneyHreshold}} </text>
-          <text style='font-size:24rpx;'>元使用 \n</text>
-          <text style='font-size:28rpx;font-weight: bolder;color:#353535;' wx:if="{{item.dateEndType == 0}}"> {{item.dateEnd}} </text>
-          <text style='font-size:24rpx;' wx:if="{{item.dateEndType == 0}}"> 前有效\n </text>
-          <text style='font-size:24rpx;' wx:if="{{item.dateEndType == 1}}"> 领取后 </text>
-          <text style='font-size:28rpx;font-weight: bolder;color:#353535;' wx:if="{{item.dateEndType == 1}}"> {{item.dateEndDays}}</text>
-          <text style='font-size:24rpx;' wx:if="{{item.dateEndType == 1}}"> 天内有效</text>
+    <view class="coupon-item" wx:for-items="{{coupons}}" wx:for-index="idx" wx:key="id" data-id="{{item.id}}">
+      <!-- 优惠券颜色块 -->
+      <view class="color-line"></view>
+      <view class="coupon-body">
+        <!-- 优惠券详情 -->
+        <view class="coupon-content__detail">
+          <view class="coupon-content__amount">
+            <text class="symbol">￥</text>
+            <text class="cost">{{item.moneyMin === item.moneyMax ? item.moneyMax : item.moneyMin +  "~" + item.moneyMax}}</text>
+            <wxc-button type="info" size="small" value="立即领取" class="exchange" bindclick="gitCoupon" data-id="{{item.id}}"></wxc-button>
+          </view>
+          <view class="coupon-content__condition">{{item.name}}</view>
+          <view class="coupon-content__describe">满{{item.moneyHreshold}}元使用</view>
         </view>
-        <view class='coupons-money'>
-          <text> ¥\n {{item.moneyMax}} </text>
+        <!-- 优惠券其他信息 -->
+        <view class="coupon-content__other">
+          <view class="coupon-content__other--info">
+            <view class="time">
+              <text wx:if="{{item.dateEndType == 0}}">{{item.dateEnd}}前有效</text>
+              <text wx:if="{{item.dateEndType == 1}}">领取后{{item.dateEndDays}}天内有效</text>
+            </view>
+          </view>
         </view>
-      </view>
-      <view class='coupons-name'>
-        <text> {{item.name}}\n </text>
       </view>
     </view>
     <wxc-toast wx:if="{{getCoupStatus===0}}" is-show="{{true}}" text="来晚了" icon="no"></wxc-toast>
@@ -54,15 +57,12 @@
     <wxc-toast wx:elif="{{getCoupStatus===2}}" is-show="{{true}}" text="你领过了，别贪心哦~" icon="no"></wxc-toast>
     <wxc-toast wx:elif="{{getCoupStatus===3}}" is-show="{{true}}" text="您的积分不足~" icon="no"></wxc-toast>
     <wxc-toast wx:elif="{{getCoupStatus===4}}" is-show="{{true}}" text="已过期~" icon="no"></wxc-toast>
-
-    <view style='width: 100%;height: 10rpx;'></view>
   </wxc-flex>
 
   <!--拼团开团-->
-  
-</view>
 
-<view class='more-things'>
-  <image src='https://cdn.it120.cc/apifactory/2017/12/27/605e53ea7d6cab4c289d8357b6ff0e2e.png' style='width:450rpx;height:220rpx;'>
-  </image>
+  <!-- <view class='more-things'>
+    <image src='https://cdn.it120.cc/apifactory/2017/12/27/605e53ea7d6cab4c289d8357b6ff0e2e.png' style='width:450rpx;height:220rpx;'>
+    </image>
+  </view> -->
 </view>

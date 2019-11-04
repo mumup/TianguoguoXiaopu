@@ -5,6 +5,6 @@
       <view class="tips">
         您暂未获取微信授权，将无法正常使用小程序的功能~如需要正常使用，请点击“授权登录”按钮，允许获得您的公开信息（昵称、头像等）
       </view>
-      <wxc-button type="success" size="small" btn-style="margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo" value="授权登录"></wxc-button>
+      <wxc-button type="info" btn-style="margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo" value="授权登录"></wxc-button>
     </view>
 </view>

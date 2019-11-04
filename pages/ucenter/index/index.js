@@ -229,6 +229,21 @@ Page({
       }
     })
   },
+  loginOut: function () {
+    const that = this;
+    wx.showModal({
+      content: '是否退出登录？',
+      success (res) {
+        if (res.confirm) {
+          util.loginOut();
+          that.setData({
+            userInfo: null,
+            notLogin: true
+          })
+        }
+      }
+    })
+  },
   relogin: function () {
     wx.navigateTo({
      url: "/pages/authorize/index"

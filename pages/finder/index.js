@@ -2,6 +2,7 @@
 //获取应用实例
 var starscore = require("../../templates/starscore/starscore.js");
 var WxSearch = require('../../templates/wxSearch/wxSearch.js');
+const util = require('../../utils/util.js');
 var app = getApp()
 Page({
   data: {
@@ -19,7 +20,8 @@ Page({
     coupons: [],
     networkStatus: true, //正常联网
     couponsStatus: 0,
-    getCoupStatus: -1
+    getCoupStatus: -1,
+    notLogin: false
   },
   
   onPullDownRefresh: function () {
@@ -48,6 +50,16 @@ Page({
       bgRed: app.globalData.bgRed,
       bgGreen: app.globalData.bgGreen,
       bgBlue: app.globalData.bgBlue
+    })
+    util.checkHasLogined().then(() => {
+      this.setData({
+        notLogin: false
+      })
+    }).catch(() => {
+      util.loginOut();
+      this.setData({
+        notLogin: true
+      })
     })
   },
   onLoad: function () {
@@ -188,6 +200,12 @@ Page({
     })
   },
   gitCoupon: function (e) {
+    if (this.data.notLogin) {
+      wx.navigateTo({
+        url: "/pages/authorize/index"
+      })
+      return;
+    }
     var that = this;
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/fetch',

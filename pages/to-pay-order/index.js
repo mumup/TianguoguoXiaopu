@@ -131,6 +131,7 @@ Page({
           // 清空购物车数据
           wx.removeStorageSync('shopCarInfo');
         }
+        console.log(e)
         if (!e) {
           that.setData({
             isNeedLogistics: res.data.data.isNeedLogistics,

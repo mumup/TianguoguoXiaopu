@@ -24,7 +24,7 @@
       <image class="icon" src="/images/more/run.png" mode="aspectFill" style='width:50rpx;height:30rpx;margin-right:20rpx;margin-top:8rpx;'></image>
       <text>距离我约：{{meters}}km</text>
     </view>
-    <wxc-button type="success" size="small" btn-style='margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;' bindtap="openTgLocation" value="导航"></wxc-button>
+    <wxc-button type="info" btn-style='margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;' bindtap="openTgLocation" value="导航"></wxc-button>
 </view>
 
 

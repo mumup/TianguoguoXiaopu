@@ -68,12 +68,12 @@
 
 .selector{
   width: 80rpx;
-  background: url(https://cdn.it120.cc/apifactory/2018/03/07/8ecdab31cfc3ccda44edd7bebfbdd45f.png) no-repeat 30rpx center;
+  background: url(https://cdn.it120.cc/images/weappshop/gou.png) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
 .selector.active{
-  background: url(https://cdn.it120.cc/apifactory/2018/03/07/d14e39b0a699114fe29c1a8614f6dbec.png) no-repeat 30rpx center;
+  background: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 

@@ -1,7 +1,10 @@
 //index.js
-var app = getApp()
+var app = getApp();
+const util = require('../../utils/util.js');
+
 Page({
   data: {
+    notLogin: false,
     goodsList: {
       saveHidden: true,
       totalPrice: 0,
@@ -39,6 +42,16 @@ Page({
     this.getDeliveryPrice()
   },
   onShow: function () {
+    util.checkHasLogined().then(() => {
+      this.setData({
+        notLogin: false
+      })
+    }).catch(() => {
+      util.loginOut();
+      this.setData({
+        notLogin: true
+      })
+    })
     var shopList = [];
     // 获取购物车数据
     var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
@@ -303,6 +316,12 @@ Page({
     this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
   },
   toPayOrder: function () {
+    if (this.data.notLogin) {
+      wx.navigateTo({
+        url: "/pages/authorize/index"
+      })
+      return;
+    }
     if (this.data.goodsList.totalPrice < this.data.shopDeliveryPrice){
       wx.showModal({
         title: '未达到起送价',
