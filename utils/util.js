@@ -174,6 +174,9 @@ function checkHasLogined() {
         } else {
           return resolve(true);
         }
+      },
+      fail: function (err) {
+        return reject(false);
       }
     })
   })
