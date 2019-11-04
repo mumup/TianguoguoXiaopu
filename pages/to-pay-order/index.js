@@ -178,6 +178,12 @@ Page({
         token: wx.getStorageSync('token')
       },
       success: (res) => {
+        if (res.data.code === 2000) {
+          wx.redirectTo({
+            url: '/pages/authorize/index'
+          })
+          return
+        }
         if (res.data.code === 0) {
           that.setData({
             curAddressData: res.data.data

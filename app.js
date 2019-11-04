@@ -201,7 +201,6 @@ App({
     goodsList: [],
     onLoadStatus: true,
     activeCategoryId: null,
-
     globalBGColor: '#00afb4',
     bgRed: 0,
     bgGreen: 175,

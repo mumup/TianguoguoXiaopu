@@ -104,6 +104,12 @@ Page({
         isDefault: 'true'
       },
       success: function (res) {
+        if (res.data.code === 2000) {
+          wx.redirectTo({
+            url: '/pages/authorize/index'
+          })
+          return
+        }
         if (res.data.code != 0) {
           // 登录错误 
           wx.hideLoading();
