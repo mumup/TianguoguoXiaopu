@@ -3,7 +3,7 @@
 <import src="../../templates/recommend-goods-item/recommend-goods-item.wxml" />
 <import src="../../templates/wxSearch/wxSearch.wxml" />
 
-<view class="container" style='background: -webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.7));'>
+<view class="container">
 
   <view class="search-view" style="background:-webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.7)); ">
     <view class="serarch-content">
@@ -22,7 +22,7 @@
     <!--<image class="introudced-img" src="{{couponsTitlePicStr}}"></image>-->
   </view>
 
-  <wxc-flex wx:if='{{!hasNoCoupons}}' class='coupons' cross="center" wrap='wrap'>
+  <wxc-flex wx:if='{{!hasNoCoupons}}' class="{{'coupons ' + (coupons.length ? 'padding-bottom' : '')}}" cross="center" wrap='wrap'>
     <wxc-toast wx:if="{{!networkStatus}}" is-show="{{true}}" text="联网失败，请刷新重试" icon="warning" icon-color="#ff5777"></wxc-toast>
     <wxc-toast wx:if="{{couponsStatus===0}}" is-show="{{true}}" text="优惠券加载中···"></wxc-toast>
     <wxc-toast wx:elif="{{couponsStatus===1}}" is-show="{{true}}" text="加载成功" icon="yes"></wxc-toast>
@@ -61,8 +61,9 @@
 
   <!--拼团开团-->
 
-  <!-- <view class='more-things'>
+
+  <view class='more-things'>
     <image src='https://cdn.it120.cc/apifactory/2017/12/27/605e53ea7d6cab4c289d8357b6ff0e2e.png' style='width:450rpx;height:220rpx;'>
     </image>
-  </view> -->
+  </view>
 </view>
