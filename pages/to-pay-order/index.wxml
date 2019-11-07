@@ -74,7 +74,7 @@
     </view>
     <view class="jiesuan-box">
       <view class="left-price">
-        <view class="total">合计：¥ {{allGoodsAndYunPrice - youhuijine}}</view>
+        <view class="total">合计：¥ {{ (allGoodsAndYunPrice - youhuijine) > 0 ? (allGoodsAndYunPrice - youhuijine) : 0 }}</view>
       </view>
       <button class="to-pay-btn" formType="submit">提交订单</button>
     </view>
