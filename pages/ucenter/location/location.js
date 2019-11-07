@@ -71,8 +71,8 @@ Page({
   data: {
     clock: '',
     isLocation: false,
-    tglatitude: 23.194466,
-    tglongitude: 113.270768,
+    tglatitude: 23.190850, 
+    tglongitude: 113.266265,
     latitude: 0,
     longitude: 0,
     markers: [],
