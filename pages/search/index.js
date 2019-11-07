@@ -55,9 +55,9 @@ Page({
             // }
 
             goods = goods.concat(res.data.data)
-            that.setData({
-              goods: goods
-            })
+            // that.setData({
+            //   goods: goods
+            // })
 
             // var page = 1;
             // var pageSize = that.data.pageSize;
@@ -100,7 +100,8 @@ Page({
             // }
             // console.log('getGoodsReputation----------------------')
             that.setData({
-              goodsNum: goods.length
+              goodsNum: goods.length,
+              goods: goods
             })
           }
           if (res.data.data == null || res.data.data.length < 10) {

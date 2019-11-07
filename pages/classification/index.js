@@ -152,14 +152,16 @@ Page(Object.assign({}, {
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
-          for (var i = 0; i < res.data.data.length; i++) {
-            categories.push(res.data.data[i]);
-          }
+          // for (var i = 0; i < res.data.data.length; i++) {
+          //   categories.push(res.data.data[i]);
+          // }
+          categories = categories.concat(res.data.data)
         }
         that.setData({
           categories: categories,
           page: 1,
         });
+        app.globalData.categories = categories
         that.getGoods(0); //获取全品类商品
       },
       fail: function () {
@@ -187,13 +189,14 @@ Page(Object.assign({}, {
           goods: [],
         });
         var goods = [];
+        var goodsName = [];
 
         if (res.data.code != 0 || res.data.data.length == 0) {
-          that.setData({
-            prePageBtn: false,
-            nextPageBtn: true,
-            toBottom: true
-          });
+          // that.setData({
+          //   prePageBtn: false,
+          //   nextPageBtn: true,
+          //   toBottom: true
+          // });
           return;
         }
 
@@ -203,6 +206,7 @@ Page(Object.assign({}, {
 
         if (res.data.data && res.data.data.length) {
           goods = goods.concat(res.data.data)
+          goodsName = res.data.data.map(item => item.name)
         }
 
         var categories = that.data.categories
@@ -258,6 +262,8 @@ Page(Object.assign({}, {
           goods: goods
         })
         app.globalData.goods = goods
+        app.globalData.goodsName = goodsName
+        app.globalData.goodsList = goodsList
         setTimeout(() => {
           that.setData({
             loadingFinish: false

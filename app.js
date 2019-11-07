@@ -52,9 +52,10 @@ App({
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
-          for (var i = 0; i < res.data.data.length; i++) {
-            categories.push(res.data.data[i]);
-          }
+          // for (var i = 0; i < res.data.data.length; i++) {
+          //   categories.push(res.data.data[i]);
+          // }
+          categories = categories.concat(res.data.data)
         }
         that.globalData.categories = categories
         that.getGoods(0);//获取全品类商品
@@ -116,17 +117,22 @@ App({
           return;
         }
         var temp;
-        for (var i = 0; i < res.data.data.length; i++) {
-          temp = res.data.data[i];
-          temp.minPrice = temp.minPrice.toFixed(2);
-          temp.originalPrice = temp.originalPrice.toFixed(2);
-          goods.push(temp);
-        }
-
         var goodsName = []; //获取全部商品名称，做为智能联想输入库
-        for (var i = 0; i < goods.length; i++) {
-          goodsName.push(goods[i].name);
+        // for (var i = 0; i < res.data.data.length; i++) {
+        //   temp = res.data.data[i];
+        //   temp.minPrice = temp.minPrice.toFixed(2);
+        //   temp.originalPrice = temp.originalPrice.toFixed(2);
+        //   goods.push(temp);
+        //   goodsName.push(temp.name);
+        // }
+        if (res.data.data && res.data.data.length) {
+          goods = goods.concat(res.data.data)
+          goodsName = res.data.data.map(item => item.name)
         }
+        
+        // for (var i = 0; i < goods.length; i++) {
+        //   goodsName.push(goods[i].name);
+        // }
         that.globalData.goodsName = goodsName
 
         // var page = that.globalData.page;
@@ -139,51 +145,80 @@ App({
         // }
         that.globalData.goods = goods
 
-        wx.request({
-          url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
-          data: {
-            page: that.globalData.page,
-            pageSize: that.globalData.pageSize,
-            categoryId: categoryId
-          },
-          success: function (res) {
-            var categories = that.globalData.categories
-            var goodsList = [],
-              id,
-              key,
-              name,
-              typeStr,
-              goodsTemp = []
-            for (let i = 0; i < categories.length; i++) {
-              id = categories[i].id;
-              key = categories[i].key;
-              name = categories[i].name;
-              typeStr = categories[i].type;
-              goodsTemp = [];
-              for (let j = 0; j < goods.length; j++) {
-                if (goods[j].categoryId === id) {
-                  goodsTemp.push(goods[j])
-                }
-              }
-              if ((that.globalData.activeCategoryId === null)&(goodsTemp.length>0)){
-                that.globalData.activeCategoryId = categories[i].id  
-              }
-              goodsList.push({ 'id': id, 'key': key, 'name': name, 'type': typeStr, 'goods': goodsTemp })
+
+        var categories = that.globalData.categories
+        var goodsList = [],
+          id,
+          key,
+          name,
+          typeStr,
+          goodsTemp = []
+        for (let i = 0; i < categories.length; i++) {
+          id = categories[i].id;
+          key = categories[i].key;
+          name = categories[i].name;
+          typeStr = categories[i].type;
+          goodsTemp = [];
+          for (let j = 0; j < goods.length; j++) {
+            if (goods[j].categoryId === id) {
+              goodsTemp.push(goods[j])
             }
-
-            that.globalData.goodsList = goodsList
-            that.globalData.onLoadStatus = true
-            //that.globalData.activeCategoryId = categories[0].id   改为第一个不为null的类
-          },
-          fail: function () {
-            that.globalData.onLoadStatus = false
           }
-        })
+          if ((that.globalData.activeCategoryId === null) && (goodsTemp.length>0)){
+            that.globalData.activeCategoryId = categories[i].id  
+          }
+          goodsList.push({ 'id': id, 'key': key, 'name': name, 'type': typeStr, 'goods': goodsTemp })
+        }
+
+        that.globalData.goodsList = goodsList
+        that.globalData.onLoadStatus = true
 
 
 
 
+        // wx.request({
+        //   url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
+        //   data: {
+        //     page: that.globalData.page,
+        //     pageSize: that.globalData.pageSize,
+        //     categoryId: categoryId
+        //   },
+        //   success: function (res) {
+        //     var categories = that.globalData.categories
+        //     var goodsList = [],
+        //       id,
+        //       key,
+        //       name,
+        //       typeStr,
+        //       goodsTemp = []
+        //     for (let i = 0; i < categories.length; i++) {
+        //       id = categories[i].id;
+        //       key = categories[i].key;
+        //       name = categories[i].name;
+        //       typeStr = categories[i].type;
+        //       goodsTemp = [];
+        //       for (let j = 0; j < goods.length; j++) {
+        //         if (goods[j].categoryId === id) {
+        //           goodsTemp.push(goods[j])
+        //         }
+        //       }
+        //       if ((that.globalData.activeCategoryId === null) && (goodsTemp.length>0)){
+        //         that.globalData.activeCategoryId = categories[i].id  
+        //       }
+        //       goodsList.push({ 'id': id, 'key': key, 'name': name, 'type': typeStr, 'goods': goodsTemp })
+        //     }
 
+        //     that.globalData.goodsList = goodsList
+        //     that.globalData.onLoadStatus = true
+        //     //that.globalData.activeCategoryId = categories[0].id   改为第一个不为null的类
+        //   },
+        //   fail: function () {
+        //     that.globalData.onLoadStatus = false
+        //   }
+        // })
+      },
+      fail: function () {
+        that.globalData.onLoadStatus = false
       }
     })
   },

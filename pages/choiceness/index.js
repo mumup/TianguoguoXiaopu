@@ -15,7 +15,6 @@ Page({
     recommendTitlePicStr: '',
     categories: [],
     activeCategoryId: 0,
-    goodsList: [], //按类别的商品
     recommendGoods: [], //推荐商品
     recommendGoodsShow: [], //显示的推荐商品，为了缓解网络加载压力设置每次加载15个推荐商品
     banners: [],
@@ -32,7 +31,6 @@ Page({
   onLoad: function () {
     var that = this
     that.setData({
-      goodsList: app.globalData.goodsList,
       pageSize: app.globalData.pageSize,
       page: app.globalData.page,
       recommendGoodsShow: [],
