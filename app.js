@@ -129,14 +129,14 @@ App({
         }
         that.globalData.goodsName = goodsName
 
-        var page = that.globalData.page;
-        var pageSize = that.globalData.pageSize;
-        for (let i = 0; i < goods.length; i++) {
-          goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
-          goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
-          goods[i].starpic = starscore.picStr(goods[i].starscore)
+        // var page = that.globalData.page;
+        // var pageSize = that.globalData.pageSize;
+        // for (let i = 0; i < goods.length; i++) {
+        //   goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
+        //   goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
+        //   goods[i].starpic = starscore.picStr(goods[i].starscore)
           
-        }
+        // }
         that.globalData.goods = goods
 
         wx.request({

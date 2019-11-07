@@ -1,5 +1,5 @@
 <import src="../starscore/starscore.wxml" />
-
+<wxs module="goods" src="../../wxs/good.wxs"></wxs>
 <template name="goods-item">
   <view class="img-box">
     <image src="{{item.pic}}" class="image">
@@ -17,11 +17,10 @@
     <view class="goodsSoldNumber" wx:if="{{item.numberOrders == 0}}">新品上市</view>
     <view class="goodsSoldNumber" wx:if="{{item.numberOrders != 0}}">已售{{item.numberOrders}}份</view>
     <view class="goodsScore">评分：
-      <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
+      <block wx:for="{{goods.getItemPicStr(item)}}" wx:key="{{item.id}}" wx:for-item="star">
         <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>
       </block>
-      <text style='font-size:18rpx;padding-left:10rpx;padding-top:-5rpx;' wx:if="{{item.starscore}}" data-pingfen="{{item.starscore}}">{{item.starscore}}分</text>
-      <text style='font-size:18rpx;padding-left:10rpx;padding-top:-5rpx;' wx:else data-pingfen="{{item.starscore}}">0分</text>
+      <text style='padding-left:10rpx;'>{{goods.getItemstarscore(item)}}分</text>
     </view>
   </view>
 </template>

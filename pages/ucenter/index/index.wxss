@@ -143,11 +143,12 @@ page {
 
 .user-menu .item{
   float: left;
-  width: 249rpx;
-  height: 167.5rpx;/*187.5*/
+  width: 33.333%;
+  height: 167.5rpx;
   border-right: 1px solid #EFEFEF;
   border-bottom: 1px solid #EFEFEF;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .user-menu .item .a{

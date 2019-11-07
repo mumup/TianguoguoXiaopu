@@ -108,7 +108,9 @@ Page({
       content: '',
       success: function (res) {
         if (res.confirm) {
-          wx.showLoading();
+          wx.showLoading({
+            mask: true
+          });
           wx.request({
             url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/delivery',
             data: {
@@ -119,6 +121,10 @@ Page({
               if (res.data.code == 0) {
                 that.onShow();
               }
+              wx.hideLoading();
+            },
+            complete: function(){
+              wx.hideLoading()
             }
           })
         }
@@ -146,7 +152,9 @@ Page({
       i++;
     }
     postJsonString.reputations = reputations;
-    wx.showLoading();
+    wx.showLoading({
+      mask: true
+    });
     wx.request({
       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/reputation',
       data: {
@@ -157,6 +165,9 @@ Page({
         if (res.data.code == 0) {
           that.onShow();
         }
+      },
+      complete: function(){
+        wx.hideLoading()
       }
     })
   },

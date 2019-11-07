@@ -16,7 +16,7 @@ Page({
         that.height = 150
       }
     })
-    console.log(this.width, this.height)
+    // console.log(this.width, this.height)
   },
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {

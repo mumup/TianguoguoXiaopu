@@ -32,6 +32,7 @@ Page({
   loadSearchContent: function (keyword, pageNum, pageSize){
       wx.showLoading({
         title: '加载中',
+        mask: true
       })
       var that=this;
       // console.log(keyword + "---" + pageNum + "---" + pageSize);
@@ -49,50 +50,54 @@ Page({
 
           var goods = that.data.goods;
           if (res.data.data != null) {
-            for (var i = 0; i < res.data.data.length; i++) {
-              goods.push(res.data.data[i])
-            }
+            // for (var i = 0; i < res.data.data.length; i++) {
+            //   goods.push(res.data.data[i])
+            // }
 
+            goods = goods.concat(res.data.data)
+            that.setData({
+              goods: goods
+            })
 
-            var page = 1;
-            var pageSize = that.data.pageSize;
-            for (let i = 0; i < goods.length; i++) {
-              wx.request({
-                url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/reputation',
-                data: {
-                  goodsId: goods[i].id,
-                  page: page,
-                  pageSize: pageSize
-                },
-                success: function (res) {
-                  if (res.data.code === 0) {
-                    if (res.data.data.length < pageSize) {
-                      goods[i].numberReputation = res.data.data.length;
-                      // console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
-                      goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
-                      goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
-                      goods[i].starpic = starscore.picStr(goods[i].starscore)
-                    }
-                    else {
-                      goods[i].numberReputation = -1;
-                    }
-                  }
-                  else if (res.data.code === 700) {
-                    goods[i].numberReputation = 0;
-                    //console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
-                    goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
-                    goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
-                    goods[i].starpic = starscore.picStr(goods[i].starscore)
-                  }
-                  that.setData({
-                    goods: goods,
-                  });
-                },
-                fail: function (res) {
+            // var page = 1;
+            // var pageSize = that.data.pageSize;
+            // for (let i = 0; i < goods.length; i++) {
+            //   wx.request({
+            //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/reputation',
+            //     data: {
+            //       goodsId: goods[i].id,
+            //       page: page,
+            //       pageSize: pageSize
+            //     },
+            //     success: function (res) {
+            //       if (res.data.code === 0) {
+            //         if (res.data.data.length < pageSize) {
+            //           goods[i].numberReputation = res.data.data.length;
+            //           // console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
+            //           goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
+            //           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
+            //           goods[i].starpic = starscore.picStr(goods[i].starscore)
+            //         }
+            //         else {
+            //           goods[i].numberReputation = -1;
+            //         }
+            //       }
+            //       else if (res.data.code === 700) {
+            //         goods[i].numberReputation = 0;
+            //         //console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
+            //         goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
+            //         goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
+            //         goods[i].starpic = starscore.picStr(goods[i].starscore)
+            //       }
+            //       that.setData({
+            //         goods: goods,
+            //       });
+            //     },
+            //     fail: function (res) {
 
-                }
-              })
-            }
+            //     }
+            //   })
+            // }
             // console.log('getGoodsReputation----------------------')
             that.setData({
               goodsNum: goods.length

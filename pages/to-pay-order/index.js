@@ -66,7 +66,9 @@ Page({
 
   createOrder: function (e) {
     var that = this;
-    wx.showLoading();
+    wx.showLoading({
+      mask: true
+    })
     var loginToken = wx.getStorageSync('token') // 用户登录 token
     var remark = ""; // 备注信息
     if (e) {

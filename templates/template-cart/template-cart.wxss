@@ -113,8 +113,8 @@
 
 .goods-info .text-box .buy-num {
   width: 194rpx;
-  height: 48rpx;
-  line-height: 48rpx;
+  height: 55rpx;
+  line-height: 55rpx;
   position: absolute;
   right: 30rpx;
   bottom: 0;
@@ -125,7 +125,7 @@
 }
 
 .goods-info .text-box .buy-num .jian-btn {
-  width: 48rpx;
+  width: 55rpx;
   height: 100%;
   font-weight: bolder;
   border-left: 1rpx solid #ccc;
@@ -145,7 +145,7 @@
 }
 
 .goods-info .text-box .buy-num .jia-btn {
-  width: 48rpx;
+  width: 55rpx;
   height: 100%;
   font-weight: bolder;
   border-right: 1rpx solid #ccc;
@@ -166,8 +166,8 @@
 
 .goods-info .text-box .buy-num input {
   width: 98rpx;
-  height: 48rpx;
-  min-height: 48rpx;
+  height: 55rpx;
+  min-height: 55rpx;
   text-align: center;
   font-size: 24rpx;
   border: 1rpx solid #ccc;

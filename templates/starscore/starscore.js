@@ -1,14 +1,12 @@
 function star(pingfen) {
-  var that = this,　　//这里是图片的路径，自己需要改
-
-  data = {
+  var data = {
     ling: "/images/0star.png",
     ban: "/images/0.5star.png",
     zheng: "/images/1star.png"
     
-  },
+  };
 
-  nums = [];//这里是返回图片排列的顺序的数组，这里要注意在页面使用的时候图片的路径，不过使用网络图片无所谓　　　
+  var nums = [];//这里是返回图片排列的顺序的数组，这里要注意在页面使用的时候图片的路径，不过使用网络图片无所谓　　　
   
   if((pingfen/0.5)%2==0){//如果评分为整数，如4.0、5.0
     for (var i = 0; i < 5; i++) {

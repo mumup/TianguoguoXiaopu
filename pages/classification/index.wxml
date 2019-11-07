@@ -1,3 +1,4 @@
+<wxs module="goods" src="../../wxs/good.wxs"></wxs>
 <view class="container">
   <view class="header" style='background: -webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.5))'>
     <view class='shop-Info'>
@@ -57,11 +58,10 @@
               <wxc-label class="sold" wx:if="{{item.numberOrders == 0}}" type='fill'>新品上市</wxc-label>
               <wxc-label class="sold" wx:if="{{item.numberOrders != 0}}">已售{{item.numberOrders}}份</wxc-label>
               <wxc-label class='star' style='position:absolute;left:380rpx;' type='fill' type-color='none' text-color='#666666'>
-                <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
+                <block wx:for="{{goods.getItemPicStr(item)}}" wx:key="{{item.id}}" wx:for-item="star">
                   <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>
                 </block>
-                <text style='padding-left:10rpx;' wx:if="{{item.starscore}}" data-pingfen="{{item.starscore}}">{{item.starscore}}分</text>
-                <text style='padding-left:10rpx;' wx:else data-pingfen="{{item.starscore}}">0分</text>
+                <text style='padding-left:10rpx;'>{{goods.getItemstarscore(item)}}分</text>
               </wxc-label>
             </view>
           </view>

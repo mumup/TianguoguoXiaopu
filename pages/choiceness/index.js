@@ -139,13 +139,13 @@ Page({
           that.setData({
             recommendTitlePicStr: res.data.data.value
           })
-          console.log('recommendTitlePicStr------------------')
-          console.log(res.data.data.value)
-          console.log('ok')
+          // console.log('recommendTitlePicStr------------------')
+          // console.log(res.data.data.value)
+          // console.log('ok')
         }
       },
       fail: function () {
-        console.log('fail')
+        // console.log('fail')
       },
     })
   },
@@ -162,7 +162,7 @@ Page({
     that.setData({
       recommendGoods: recommendGoods
     })
-    console.log('recommendGoods:', recommendGoods)
+    // console.log('recommendGoods:', recommendGoods)
   },
   getNotice: function () {
     var that = this;
@@ -186,7 +186,7 @@ Page({
         key: 'mallName'
       },
       success: function (res) {
-        console.log("请求banners返回代码", res.data.code)
+        // console.log("请求banners返回代码", res.data.code)
         if (res.data.code === 0) {
           that.setData({
             banners: res.data.data
@@ -208,17 +208,17 @@ Page({
   getRGshow: function () {
     var that = this;
     if (that.data.isEnd) {
-      console.log('isEnd, return...')
+      // console.log('isEnd, return...')
       return;
     }
-    console.log('notEnd, continue')
+    // console.log('notEnd, continue')
     that.setData({
       loadingMore: true
     })
     var pageSize = 10; //一次加载万所有的推荐商品，避免minui显示问题that.data.recommendGoods.length
     var recommendGoodsShow = that.data.recommendGoodsShow;
     var rgShowLen = recommendGoodsShow.length;
-    console.log('rgShowLen', rgShowLen)
+    // console.log('rgShowLen', rgShowLen)
     if (rgShowLen + pageSize <= that.data.recommendGoods.length) {
       for (var i = rgShowLen; i < rgShowLen + pageSize; i++) {
         recommendGoodsShow.push(that.data.recommendGoods[i])
@@ -239,7 +239,7 @@ Page({
           isEnd: true
         })
       }
-      console.log(recommendGoodsShow.length, '-=-=-=-=-=-=-=')
+      // console.log(recommendGoodsShow.length, '-=-=-=-=-=-=-=')
     } else if (rgShowLen < that.data.recommendGoods.length) {
       for (var i = rgShowLen; i < that.data.recommendGoods.length; i++) {
         recommendGoodsShow.push(that.data.recommendGoods[i])
@@ -252,14 +252,14 @@ Page({
         isEnd: true
       })
 
-      console.log(recommendGoodsShow.length, '-=-=-=-=-=-=-=')
+      // console.log(recommendGoodsShow.length, '-=-=-=-=-=-=-=')
     }
     that.setData({
       loadingMore: false
     })
   },
   handlerStart(e) {
-    console.log('handlerStart')
+    // console.log('handlerStart')
     let { clientX, clientY } = e.touches[0];
     this.startX = clientX;
     this.tapStartX = clientX;
@@ -269,7 +269,7 @@ Page({
     this.setData({ stv: this.data.stv })
   },
   handlerMove(e) {
-    console.log('handlerMove')
+    // console.log('handlerMove')
     let { clientX, clientY } = e.touches[0];
     let { stv } = this.data;
     let offsetX = this.startX - clientX;
@@ -286,31 +286,31 @@ Page({
 
   },
   handlerEnd(e) {
-    console.log('handlerEnd')
+    // console.log('handlerEnd')
     let { clientX, clientY } = e.changedTouches[0];
     let endTime = e.timeStamp;
     let { tabs, stv, activeTab } = this.data;
     let { offset, windowWidth } = stv;
     //快速滑动
     if (endTime - this.tapStartTime <= 300) {
-      console.log('快速滑动')
+      // console.log('快速滑动')
       //判断是否左右滑动(竖直方向滑动小于50)
       if (Math.abs(this.tapStartY - clientY) < 50) {
         //Y距离小于50 所以用户是左右滑动
-        console.log('竖直滑动距离小于50')
+        // console.log('竖直滑动距离小于50')
         if (this.tapStartX - clientX > 5) {
           //向左滑动超过5个单位，activeTab增加
-          console.log('向左滑动')
+          // console.log('向左滑动')
 
         } else if (clientX - this.tapStartX > 5) {
           //向右滑动超过5个单位，activeTab减少
-          console.log('向右滑动')
+          // console.log('向右滑动')
 
         }
         stv.offset = stv.windowWidth * activeTab;
       } else {
         //Y距离大于50 所以用户是上下滑动
-        console.log('竖直滑动距离大于50')
+        // console.log('竖直滑动距离大于50')
 
       }
     } else {

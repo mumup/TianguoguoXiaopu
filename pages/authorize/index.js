@@ -82,7 +82,8 @@ Page({
     let that = this;
     let token = wx.getStorageSync('token');
     wx.showLoading({
-      title: '登录中'
+      title: '登录中',
+      mask: true
     });
     if (token) {
       wx.request({

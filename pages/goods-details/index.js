@@ -130,6 +130,10 @@ Page({
    * 规格选择弹出框
    */
   bindGuiGeTap: function () {
+    // 拿到商品数据才弹选择规格的弹窗
+    if (!(this.data.goodsDetail.basicInfo && this.data.goodsDetail.basicInfo.name)) {
+      return;
+    }
     this.setData({
       hideShopPopup: false
     })

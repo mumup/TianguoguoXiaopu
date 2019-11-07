@@ -1,0 +1,39 @@
+function star(pingfen) {
+    var data = {
+        ling: "/images/0star.png",
+        ban: "/images/0.5star.png",
+        zheng: "/images/1star.png"
+        
+    };
+    var nums = [];
+
+    if((pingfen/0.5)%2==0){
+        for (var i = 0; i < 5; i++) {
+        if (i < pingfen) {
+            nums.push(data.zheng);
+        } else {
+            nums.push(data.ling);
+        }
+        }
+    }else{
+        for (var i = 0; i < 5; i++) {
+        if (i < pingfen - 0.5) {
+            nums.push(data.zheng);
+        } else if (i == (pingfen - 0.5)) {
+            nums.push(data.ban);
+        } else {
+            nums.push(data.ling);
+        }
+        }
+    }
+
+    return nums;
+}
+function getItemstarscore(item) {
+    return Math.ceil(item.numberGoodReputation / item.numberOrders * 5 / 0.5) * 0.5 || 0
+}
+function getItemPicStr(item) {
+    return star(getItemstarscore(item))
+}
+module.exports.getItemstarscore = getItemstarscore;
+module.exports.getItemPicStr = getItemPicStr;

@@ -26,7 +26,7 @@ Page({
               coupons: coupons
             });
           }
-          console.log(coupons)
+          // console.log(coupons)
         }
       }
     })

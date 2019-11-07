@@ -38,7 +38,6 @@ Page({
   },
   onLoad: function() {
     this.initEleWidth()
-    //this.onShow();
     this.getDeliveryPrice()
   },
   onShow: function() {
@@ -307,6 +306,9 @@ Page({
       // 添加判断当前商品购买数量是否超过当前商品可购买库存
       var carShopBean = list[parseInt(index)]
       var carShopBeanStores = 0
+      wx.showLoading({
+        mask: true
+      })
       wx.request({
         url:
           'https://api.it120.cc/' +
@@ -316,6 +318,20 @@ Page({
           id: carShopBean.goodsId
         },
         success: function(res) {
+          if(!(res.data && res.data.data && res.data.data.basicInfo)) {
+            // 商品不存在
+            wx.showModal({
+              title: '提示',
+              content: carShopBean.name + ' 不存在，请重新购买',
+              showCancel: false,
+              success (res) {
+                if (res.confirm) {
+                  that.delItemByGoosId(carShopBean.goodsId)
+                }
+              }
+            })
+            return;
+          }
           carShopBeanStores = res.data.data.basicInfo.stores
           // console.log(
           //   ' currnet good id and stores is :',
@@ -344,6 +360,9 @@ Page({
           that.setData({
             curTouchGoodStores: carShopBeanStores
           })
+        },
+        complete: function(){
+          wx.hideLoading()
         }
       })
     }
@@ -432,6 +451,19 @@ Page({
       })
     })
   },
+  delItemByGoosId(id) {
+    var list = this.data.goodsList.list
+    let find = list.findIndex(item => item.goodsId === id)
+    if (find !== -1) {
+      this.delItem({
+        currentTarget: {
+          dataset: {
+            index: find
+          }
+        }
+      })
+    }
+  },
   async toPayOrder() {
     if (this.data.notLogin) {
       wx.navigateTo({
@@ -446,7 +478,9 @@ Page({
         showCancel: false
       })
     } else {
-      wx.showLoading()
+      wx.showLoading({
+        mask: true
+      })
       var that = this
       if (this.data.goodsList.noSelect) {
         wx.hideLoading()
@@ -474,234 +508,92 @@ Page({
           break;
         }
         let carShopBean = shopList[i]
+        let api = ''
+        let apiData = {}
         // 获取价格和库存
         if (
           !carShopBean.propertyChildIds ||
           carShopBean.propertyChildIds == ''
         ) {
-          try {
-            var resData = await this.requestData(
-              'https://api.it120.cc/' +
-                app.globalData.subDomain +
-                '/shop/goods/detail',
-              {
-                id: carShopBean.goodsId
-              }
-            )
-            doneNumber++
-            if (resData.data.code === 404) {
-              wx.showModal({
-                title: '提示',
-                content: '商品 ' + carShopBean.name + ' 不存在，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (resData.data.data.properties) {
-              wx.showModal({
-                title: '提示',
-                content:
-                  res.data.data.basicInfo.name + ' 商品已失效，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (resData.data.data.basicInfo.stores < carShopBean.number) {
-              wx.showModal({
-                title: '提示',
-                content: res.data.data.basicInfo.name + ' 库存不足，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (resData.data.data.basicInfo.minPrice != carShopBean.price) {
-              wx.showModal({
-                title: '提示',
-                content:
-                  res.data.data.basicInfo.name + ' 价格有调整，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (needDoneNUmber == doneNumber) {
-              that.navigateToPayOrder()
-            }
-          } catch (err) {
-            isFail = true
-            wx.hideLoading()
+          api = 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail'
+          apiData = {
+            id: carShopBean.goodsId
           }
         } else {
-          try {
-            var resData = await this.requestData(
-              'https://api.it120.cc/' +
-                app.globalData.subDomain +
-                '/shop/goods/price',
-              {
-                goodsId: carShopBean.goodsId,
-                propertyChildIds: carShopBean.propertyChildIds
+          api = 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/price'
+          apiData = {
+            goodsId: carShopBean.goodsId,
+            propertyChildIds: carShopBean.propertyChildIds
+          }
+        }
+        try {
+          var resData = await this.requestData(api,apiData)
+          doneNumber++
+          if (resData.data.code === 404 && resData.data.msg === '暂无数据') {
+            wx.showModal({
+              title: '提示',
+              content: carShopBean.name + ' 不存在，请重新购买',
+              showCancel: false,
+              success (res) {
+                if (res.confirm) {
+                  that.delItemByGoosId(carShopBean.goodsId)
+                }
               }
-            )
-            doneNumber++
-            if (resData.data.code === 404 && resData.data.msg === '暂无数据') {
-              wx.showModal({
-                title: '提示',
-                content: '商品 ' + carShopBean.name + ' 不存在，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (resData.data.data.stores < carShopBean.number) {
-              wx.showModal({
-                title: '提示',
-                content: carShopBean.name + ' 库存不足，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (resData.data.data.price != carShopBean.price) {
-              wx.showModal({
-                title: '提示',
-                content: carShopBean.name + ' 价格有调整，请重新购买',
-                showCancel: false
-              })
-              isFail = true
-              wx.hideLoading()
-              return
-            }
-            if (needDoneNUmber == doneNumber) {
-              that.navigateToPayOrder()
-            }
-          } catch (err) {
+            })
             isFail = true
             wx.hideLoading()
+            return
           }
+          if (resData.data.data.properties) {
+            wx.showModal({
+              title: '提示',
+              content: carShopBean.name + ' 商品已失效，请重新购买',
+              showCancel: false,
+              success (res) {
+                if (res.confirm) {
+                  that.delItemByGoosId(carShopBean.goodsId)
+                }
+              }
+            })
+            isFail = true
+            wx.hideLoading()
+            return
+          }
+          if (resData.data.data && resData.data.data.basicInfo && resData.data.data.basicInfo.stores < carShopBean.number || (resData.data.data && resData.data.data.stores < carShopBean.number)) {
+            wx.showModal({
+              title: '提示',
+              content: carShopBean.name + ' 库存不足，请重新购买',
+              showCancel: false
+            })
+            isFail = true
+            wx.hideLoading()
+            return
+          }
+          if (resData.data.data && resData.data.data.basicInfo && resData.data.data.basicInfo.minPrice != carShopBean.price || (resData.data.data && resData.data.data.price != carShopBean.price)) {
+            wx.showModal({
+              title: '提示',
+              content: carShopBean.name + ' 价格有调整，请重新购买',
+              showCancel: false,
+              success (res) {
+                if (res.confirm) {
+                  that.delItemByGoosId(carShopBean.goodsId)
+                }
+              }
+            })
+            isFail = true
+            wx.hideLoading()
+            return
+          }
+          if (needDoneNUmber == doneNumber) {
+            that.navigateToPayOrder()
+          }
+        } catch (err) {
+          isFail = true
+          wx.hideLoading()
         }
       }
     }
   },
-  /*toPayOrder: function () {
-    wx.showLoading();
-    var that = this;
-    if (this.data.goodsList.noSelect) {
-      wx.hideLoading();
-      return;
-    }
-    // 重新计算价格，判断库存
-    var shopList = [];
-    var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-    if (shopCarInfoMem && shopCarInfoMem.shopList) {
-      // shopList = shopCarInfoMem.shopList
-      shopList = shopCarInfoMem.shopList.filter(entity => {
-        return entity.active;
-      });
-    }
-    if (shopList.length == 0) {
-      wx.hideLoading();
-      return;
-    }
-    var isFail = false;
-    var doneNumber = 0;
-    var needDoneNUmber = shopList.length;
-    for (let i = 0; i < shopList.length; i++) {
-      if (isFail) {
-        wx.hideLoading();
-        return;
-      }
-      let carShopBean = shopList[i];
-      // 获取价格和库存
-      if (!carShopBean.propertyChildIds || carShopBean.propertyChildIds == "") {
-        wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail',
-          data: {
-            id: carShopBean.goodsId
-          },
-          success: function (res) {
-            doneNumber++;
-            if (res.data.data.properties) {
-              wx.showModal({
-                title: '提示',
-                content: res.data.data.basicInfo.name + ' 商品已失效，请重新购买',
-                showCancel: false
-              })
-              isFail = true;
-              wx.hideLoading();
-              return;
-            }
-            if (res.data.data.basicInfo.stores < carShopBean.number) {
-              wx.showModal({
-                title: '提示',
-                content: res.data.data.basicInfo.name + ' 库存不足，请重新购买',
-                showCancel: false
-              })
-              isFail = true;
-              wx.hideLoading();
-              return;
-            }
-            if (res.data.data.basicInfo.minPrice != carShopBean.price) {
-              wx.showModal({
-                title: '提示',
-                content: res.data.data.basicInfo.name + ' 价格有调整，请重新购买',
-                showCancel: false
-              })
-              isFail = true;
-              wx.hideLoading();
-              return;
-            }
-            if (needDoneNUmber == doneNumber) {
-              that.navigateToPayOrder();
-            }
-          }
-        })
-      } else {
-        wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/price',
-          data: {
-            goodsId: carShopBean.goodsId,
-            propertyChildIds: carShopBean.propertyChildIds
-          },
-          success: function (res) {
-            doneNumber++;
-            if (res.data.data.stores < carShopBean.number) {
-              wx.showModal({
-                title: '提示',
-                content: carShopBean.name + ' 库存不足，请重新购买',
-                showCancel: false
-              })
-              isFail = true;
-              wx.hideLoading();
-              return;
-            }
-            if (res.data.data.price != carShopBean.price) {
-              wx.showModal({
-                title: '提示',
-                content: carShopBean.name + ' 价格有调整，请重新购买',
-                showCancel: false
-              })
-              isFail = true;
-              wx.hideLoading();
-              return;
-            }
-            if (needDoneNUmber == doneNumber) {
-              that.navigateToPayOrder();
-            }
-          }
-        })
-      }
-
-    }
-  },*/
   navigateToPayOrder: function() {
     wx.hideLoading()
     wx.navigateTo({

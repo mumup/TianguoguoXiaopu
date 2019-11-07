@@ -192,7 +192,9 @@ Page({
     var id = e.id;
     if (id) {
       // 初始化原数据
-      wx.showLoading();
+      wx.showLoading({
+        mask: true
+      });
       wx.request({
         url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/detail',
         data: {
@@ -218,6 +220,9 @@ Page({
               showCancel: false
             })
           }
+        },
+        complete: function(){
+          wx.hideLoading()
         }
       })
     }

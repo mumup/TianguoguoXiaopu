@@ -85,13 +85,13 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     this.getTgLocation()
-    console.log("onLoad")
+    // console.log("onLoad")
     count_down(this);
   },
   //****************************
   openLocation:function (){
     var that = this
-    console.log(that.data.tglatitude),
+    // console.log(that.data.tglatitude)
     wx.getLocation({
       type: 'gcj02', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
       success: function(res){
@@ -105,7 +105,7 @@ Page({
   },
   openTgLocation: function () {
     var that = this
-    console.log(that.data.tglatitude),
+    // console.log(that.data.tglatitude)
     wx.openLocation({
       latitude: that.data.tglatitude,
       longitude: that.data.tglongitude,
@@ -150,8 +150,8 @@ Page({
     wx.getLocation({
       type: 'gcj02', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
       success: function(res){
-        console.log("res----------")
-        console.log(res)
+        // console.log("res----------")
+        // console.log(res)
         //make datas 
         var newCover = {
             latitude: res.latitude,
@@ -159,8 +159,8 @@ Page({
           };
         var oriCovers = that.data.covers;
         
-        console.log("oriMeters----------")
-        console.log(oriMeters);
+        // console.log("oriMeters----------")
+        // console.log(oriMeters);
         var len = oriCovers.length;
         var lastCover;
         if (len == 0) {
@@ -169,8 +169,8 @@ Page({
         len = oriCovers.length;
         var lastCover = oriCovers[len-1];
         
-        console.log("oriCovers----------")
-        console.log(oriCovers,len);
+        // console.log("oriCovers----------")
+        // console.log(oriCovers,len);
 
         var newMeters = getDistance(lastCover.latitude,lastCover.longitude,res.latitude,res.longitude)/1000;
         
@@ -179,8 +179,8 @@ Page({
         }
 
         oriMeters = oriMeters + newMeters; 
-        console.log("newMeters----------")
-        console.log(newMeters);
+        // console.log("newMeters----------")
+        // console.log(newMeters);
 
 
         var meters = new Number(oriMeters);
@@ -204,8 +204,8 @@ Page({
     wx.getLocation({
       type: 'gcj02', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
       success: function (res) {
-        console.log("res----------")
-        console.log(res)
+        // console.log("res----------")
+        // console.log(res)
         //make datas 
         var newCover = {
           latitude: that.data.tglatitude,
@@ -217,16 +217,16 @@ Page({
         if (newMeters < 0.0015) {
           newMeters = 0.0;
         }
-        console.log("newMeters----------")
-        console.log(newMeters);
+        // console.log("newMeters----------")
+        // console.log(newMeters);
 
         var meters = new Number(newMeters);
         var showMeters = meters.toFixed(2);
 
         var oriCovers = that.data.covers;
         oriCovers.push(newCover);
-        console.log("oriCovers----------")
-        console.log(oriCovers);
+        // console.log("oriCovers----------")
+        // console.log(oriCovers);
 
         that.setData({
           latitude: that.data.tglatitude,//res.latitude,

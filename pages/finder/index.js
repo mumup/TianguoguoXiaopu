@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-var starscore = require("../../templates/starscore/starscore.js");
+// var starscore = require("../../templates/starscore/starscore.js");
 var WxSearch = require('../../templates/wxSearch/wxSearch.js');
 const util = require('../../utils/util.js');
 var app = getApp()
@@ -84,13 +84,13 @@ Page({
           that.setData({
             couponsTitlePicStr: res.data.data.value
           })
-          console.log('couponsTitlePicStr------------------')
+          /* console.log('couponsTitlePicStr------------------')
           console.log(res.data.data.value)
-          console.log('ok')
+          console.log('ok') */
         }
       },
       fail: function () {
-        console.log('fail')
+        // console.log('fail')
       },
     })
   },
@@ -101,58 +101,8 @@ Page({
     })
   },
   toSearch: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '/pages/search/index?keyword=' + this.data.keyword,
-    })
-    console.log(e);
-  },
-  getGoodsList: function (categoryId) {
-    if (categoryId == 0) {
-      categoryId = "";
-    }
-    console.log(categoryId)
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
-      data: {
-        page: that.data.page,
-        pageSize: that.data.pageSize,
-        categoryId: categoryId
-      },
-      success: function (res) {
-        that.setData({
-          goods: [],
-          loadingMoreHidden: true
-        });
-        var goods = [];
-        if (res.data.code != 0 || res.data.data.length == 0) {
-          that.setData({
-            loadingMoreHidden: false,
-            prePageBtn: false,
-            nextPageBtn: true,
-            toBottom: true
-          });
-          return;
-        }
-        for (var i = 0; i < res.data.data.length; i++) {
-          goods.push(res.data.data[i]);
-        }
-
-
-        console.log('getGoodsList----------------------')
-        console.log(goods)
-
-
-        for (let i = 0; i < goods.length; i++) {
-          goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
-          goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
-          goods[i].starpic = starscore.picStr(goods[i].starscore)
-        }
-        console.log('getGoodsReputation----------------------')
-        console.log(goods)
-
-      }
     })
   },
   getCoupons: function () {
@@ -277,7 +227,7 @@ Page({
                   url: '/pages/authorize/index',
                 })
               } else if (res.cancel) {
-                console.log('用户点击取消授权登陆')
+                // console.log('用户点击取消授权登陆')
               }
             }
           })

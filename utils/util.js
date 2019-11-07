@@ -37,7 +37,7 @@ function request(url, data = {}, method = "GET") {
         'X-Nideshop-Token': wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log("success");
+        // console.log("success");
 
         if (res.statusCode == 200) {
 
@@ -76,7 +76,7 @@ function request(url, data = {}, method = "GET") {
       },
       fail: function (err) {
         reject(err)
-        console.log("failed")
+        // console.log("failed")
       }
     })
   });
