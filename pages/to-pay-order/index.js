@@ -22,7 +22,7 @@ Page({
     var shopList = [];
     //立即购买下单
     if ("buyNow" === that.data.orderType) {
-      console.log('buyNow!!')
+      // console.log('buyNow!!')
       var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       that.data.kjId = buyNowInfoMem.kjId;
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
@@ -50,7 +50,7 @@ Page({
     //显示收货地址标识
     that.setData({
       isNeedLogistics: 1,
-      orderType: e.orderType
+      orderType: e.orderType || ''
     });
   },
 
@@ -131,7 +131,6 @@ Page({
           // 清空购物车数据
           wx.removeStorageSync('shopCarInfo');
         }
-        console.log(e)
         if (!e) {
           that.setData({
             isNeedLogistics: res.data.data.isNeedLogistics,

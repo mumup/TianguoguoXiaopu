@@ -16,7 +16,6 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
-    console.log(options)
     //初始化的时候渲染wxSearchdata 第二个为你的search高度
     WxSearch.init(that, 43, app.globalData.hotGoods);
     WxSearch.initMindKeys(app.globalData.goodsName);
@@ -35,7 +34,7 @@ Page({
         title: '加载中',
       })
       var that=this;
-      console.log(keyword + "---" + pageNum + "---" + pageSize);
+      // console.log(keyword + "---" + pageNum + "---" + pageSize);
       wx.request({
         url: "https://api.it120.cc/" + app.globalData.subDomain + "/shop/goods/list",
         data:{
@@ -69,7 +68,7 @@ Page({
                   if (res.data.code === 0) {
                     if (res.data.data.length < pageSize) {
                       goods[i].numberReputation = res.data.data.length;
-                      console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
+                      // console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
                       goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
                       goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
                       goods[i].starpic = starscore.picStr(goods[i].starscore)
@@ -94,13 +93,13 @@ Page({
                 }
               })
             }
-            console.log('getGoodsReputation----------------------')
+            // console.log('getGoodsReputation----------------------')
             that.setData({
               goodsNum: goods.length
             })
           }
           if (res.data.data == null || res.data.data.length < 10) {
-            console.log("数据为空")
+            // console.log("数据为空")
             that.setData({
               loadingHidden: true
             })
@@ -110,7 +109,7 @@ Page({
             })
           }
 
-          console.log(that.data)
+          // console.log(that.data)
 
            wx.showToast({
              title: '加载成功',
@@ -142,12 +141,12 @@ Page({
   },
   toSearch:function(e){
     var that = this
-    console.log(e)
+    // console.log(e)
     
     this.refreshGoodsList();
   },
   toDetailsTap: function (e) {
-    console.log(e)
+    // console.log(e)
     wx.navigateTo({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })

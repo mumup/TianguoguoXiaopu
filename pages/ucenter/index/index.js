@@ -70,7 +70,7 @@ Page({
   },
   getPhoneNumber: function (e) {
     if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
-      console.log(e.detail.errMsg)
+      // console.log(e.detail.errMsg)
       wx.showModal({
         title: '提示',
         content: '无法获取手机号码',

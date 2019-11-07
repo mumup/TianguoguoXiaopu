@@ -254,6 +254,9 @@ Page({
 
       console.log(recommendGoodsShow.length, '-=-=-=-=-=-=-=')
     }
+    that.setData({
+      loadingMore: false
+    })
   },
   handlerStart(e) {
     console.log('handlerStart')

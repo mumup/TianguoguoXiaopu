@@ -62,7 +62,6 @@ App({
       fail: function () {
         that.globalData.onLoadStatus = false
         wx.hideLoading()
-        console.log('11')
       }
     })
   },
@@ -139,7 +138,6 @@ App({
           
         }
         that.globalData.goods = goods
-        console.log(that)
 
         wx.request({
           url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
@@ -179,8 +177,6 @@ App({
           },
           fail: function () {
             that.globalData.onLoadStatus = false
-            
-            console.log('33')
           }
         })
 

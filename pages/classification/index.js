@@ -1,5 +1,4 @@
 var app = getApp();
-console.log(111)
 var starscore = require("../../templates/starscore/starscore.js");
 //var server = require('../../utils/server');
 Page(Object.assign({},{
@@ -37,7 +36,6 @@ Page(Object.assign({},{
   },
   onLoad: function (options) {
     var that = this
-    console.log(that)
     
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
@@ -68,12 +66,10 @@ Page(Object.assign({},{
     wx.getSystemInfo({
       //获取系统信息成功，将系统窗口的宽高赋给页面的宽高  
       success: function (res) {
-        //console.log(res.windowWidth)
         that.width = res.windowWidth / 2.9  //2.6
         that.height = res.windowWidth / 2.9  //2.6
       }
     })
-    //console.log(this.width, this.height)
     that.getPrompt();
     that.getDelivery();
     if (!that.data.onLoadStatus) {
@@ -114,7 +110,6 @@ Page(Object.assign({},{
       that.setData({
         classifyViewed: id,
       });
-      console.log('id:', that.data.classifyViewed)
       for (var i = 0; i < that.data.categories.length; i++) {
         if (id === that.data.categories[i].id) {
           that.setData({
