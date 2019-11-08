@@ -5,11 +5,11 @@
         <view class="title" bindtap="addAddress">新增收货地址</view>
       </view>
       <view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
-        <view style='display: flex;flex-direction: row;'>
-          <wxc-icon type='location' size='40' color='#666666' style='padding-left:30rpx;padding-top:20rpx;'></wxc-icon>
+        <wxc-icon type='location' size='40' color='#666666' style='padding-left:30rpx;'></wxc-icon>
+        <view style="margin-right: 80rpx;">
           <view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+          <view class="addr-text">{{curAddressData.address}}</view>
         </view>
-        <view class="addr-text">{{curAddressData.address}}</view>
       </view>
     </view>
     <view class="goods-list">

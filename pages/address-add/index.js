@@ -100,7 +100,7 @@ Page({
         linkMan: linkMan,
         address: address,
         mobile: mobile,
-        code: code || '',
+        code: code || 510000,
         isDefault: 'true'
       },
       success: function (res) {

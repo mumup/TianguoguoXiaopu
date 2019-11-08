@@ -101,7 +101,7 @@ Page({
       postData.address = that.data.curAddressData.address;
       postData.linkMan = that.data.curAddressData.linkMan;
       postData.mobile = that.data.curAddressData.mobile;
-      postData.code = that.data.curAddressData.code;
+      postData.code = that.data.curAddressData.code || 510000;
     }
     if (that.data.curCoupon) {
       postData.couponId = that.data.curCoupon.id;
