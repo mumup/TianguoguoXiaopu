@@ -145,12 +145,12 @@ swiper-item image {
 }
 
 .goods-text {
-  padding: 0 10rpx;
+  padding: 0 30rpx;
   font-size: 28rpx;
   color: #666;
   line-height: 56rpx;
   margin-bottom: 30rpx;
-  display: inline-block;
+  display: flex;
   position: relative;
   overflow: hidden;
 }

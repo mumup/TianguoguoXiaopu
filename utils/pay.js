@@ -24,8 +24,14 @@ function wxpay(app, money, orderId, redirectUrl) {
           package:'prepay_id=' + res.data.data.prepayId,
           signType:'MD5',
           paySign:res.data.data.sign,
-          fail:function (aaa) {
-            wx.showToast({title: '支付失败:' + aaa})
+          fail:function (err) {
+            let tips = {}
+            if (err.errMsg && err.errMsg.search(/cancel/ig) !== -1) {
+              tips.title = '用户取消支付...'
+            } else {
+              tips.title = '支付失败'
+            }
+            wx.showToast(tips)
           },
           success:function () {
             wx.showToast({title: '支付成功'})

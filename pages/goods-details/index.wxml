@@ -48,10 +48,10 @@
       <text style="color:red">({{reputation.length}})</text>
     </view>
     <view class="goods-text" style="margin-top:15rpx;" wx:for="{{reputation}}" wx:key="id">
-      <view style="width:100rpx;float:left;">
+      <view style="width:100rpx;">
         <image style="width: 100rpx; height: 100rpx;" src="{{item.user.avatarUrl}}"></image>
       </view>
-      <view style="width:500rpx;float:left;margin-left:35rpx;border-bottom:1px solid #f4f4f4;">
+      <view style="flex: 1;margin:0 25rpx;border-bottom:1px solid #f4f4f4;">
         <view>{{item.goods.goodReputationRemark}}</view>
         <view style="color: #B0B0B0;font-size:24rpx;">{{item.goods.dateReputation}} {{item.goods.property}}</view>
       </view>
