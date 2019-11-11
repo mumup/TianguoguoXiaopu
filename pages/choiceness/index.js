@@ -49,7 +49,7 @@ Page({
     that.getRGshow()
     try {
       var res = wx.getSystemInfoSync()
-      console.log('system information', res)
+      // console.log('system information', res)
       if (that.data.noticeList) {
         that.setData({
           stv: {
@@ -71,7 +71,7 @@ Page({
     } catch (e) {
 
     }
-    console.log('stv', that.data.stv, that.data.height)
+    // console.log('stv', that.data.stv, that.data.height)
   },
   onShow: function () {
     var that = this

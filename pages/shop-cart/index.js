@@ -473,7 +473,7 @@ Page({
     }
     if (this.data.goodsList.totalPrice < this.data.shopDeliveryPrice) {
       wx.showModal({
-        title: '未达到起送价',
+        title: '起送价为：' + this.data.shopDeliveryPrice + '元',
         content: '请您再选一些吧！',
         showCancel: false
       })
