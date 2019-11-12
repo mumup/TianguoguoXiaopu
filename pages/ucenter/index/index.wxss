@@ -151,6 +151,18 @@ page {
   box-sizing: border-box;
 }
 
+.user-menu .item button{
+  padding: 0;
+  line-height: 1;
+}
+.user-menu .item button::after{
+  border: none;
+}
+.user-menu .item button.button-hover{
+  opacity: 1;
+  background-color: #fff;
+}
+
 .user-menu .item .a{
   display: flex;
   width: 100%;
@@ -158,6 +170,8 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: inherit;
+  background-color: #fff;
 }
 .user-menu .item.no-border-right {
   border-right: 0;

@@ -101,10 +101,14 @@
       </view>
     </view>
     <view class="item">
-      <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
+      <!-- <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
         <wxc-icon type="comment" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">意见反馈</text>
-      </navigator>
+      </navigator> -->
+      <button open-type='feedback' class="a">
+        <wxc-icon type="comment" size="{{iconSize}}" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
+        <text class="txt">意见反馈</text>
+      </button>
     </view>
     <view class="item" bindtap="aboutUs">
       <view class="a">
