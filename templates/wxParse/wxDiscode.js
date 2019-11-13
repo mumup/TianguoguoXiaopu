@@ -19,7 +19,7 @@ function strNumDiscode(str){
     str = str.replace(/&and;/g, '∧');
     str = str.replace(/&or;/g, '∨');
     str = str.replace(/&cap;/g, '∩');
-    str = str.replace(/&cap;/g, '∪');
+    str = str.replace(/&cup;/g, '∪');
     str = str.replace(/&int;/g, '∫');
     str = str.replace(/&there4;/g, '∴');
     str = str.replace(/&sim;/g, '∼');
@@ -99,7 +99,7 @@ function strGreeceDiscode(str){
     return str;
 }
 
-// 
+//
 
 function strcharacterDiscode(str){
     // 加入常用解析
@@ -176,8 +176,11 @@ function strOtherDiscode(str){
 }
 
 function strMoreDiscode(str){
-    str = str.replace(/\r\n/g,"");  
-    str = str.replace(/\n/g,"");
+    // str = str.replace(/\r\n/g,"");
+    // str = str.replace(/\n/g,"");
+
+    str = str.replace(/>\r\n</g,"><");
+    str = str.replace(/>\n</g,"><");
 
     str = str.replace(/code/g,"wxxxcode-style");
     return str;
@@ -192,7 +195,7 @@ function strDiscode(str){
     return str;
 }
 function urlToHttpUrl(url,rep){
-    
+
     var patt1 = new RegExp("^//");
     var result = patt1.test(url);
     if(result){
