@@ -2,7 +2,6 @@
 @import "/templates/wxParse/htmlContent.wxss";
 
 .notice {
-  width: 750rpx;
   padding: 15rpx;
   font-size: 25rpx;
 }

@@ -12,7 +12,8 @@ Page({
     score_sign_continuous: 0,
     iconSize: 45,
     iconColor: '#999999',
-    notLogin: true
+    notLogin: true,
+    shopLogo: ''
   },
   onPullDownRefresh: function () {
     var that = this
@@ -32,6 +33,9 @@ Page({
     })
   },
   onShow() {
+    this.setData({
+      shopLogo: app.globalData.shopLogo
+    })
     var that = this;
     util.checkHasLogined().then(() => {
       that.setData({

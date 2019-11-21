@@ -1,0 +1,21 @@
+@import "/templates/wxParse/wxParse.wxss";
+@import "/templates/wxParse/htmlContent.wxss";
+
+
+.news-detail-header{
+  padding: .7rem;
+  padding-bottom: 0;
+}
+
+.news-detail-title {
+  font-size: 44rpx;
+  line-height: 30px;
+}
+.news-detail-changes {
+  color: #999;
+  font-size: 26rpx;
+  margin-top: 18rpx;
+}
+.news-detail-changes text {
+  padding-right: 28rpx;
+}

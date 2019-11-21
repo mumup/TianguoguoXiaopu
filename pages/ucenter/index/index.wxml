@@ -16,7 +16,7 @@
       </view>
     </view>
     <view wx:else class="userinfo" bindtap="relogin">
-      <wxc-avatar class="userinfo-avatar-no" mold="square" src="https://cdn.it120.cc/apifactory/2018/06/10/527a0d6e3b3f1ffc32748193d743da26.jpg"> </wxc-avatar>
+      <wxc-avatar class="userinfo-avatar-no" mold="square" src="{{shopLogo}}"> </wxc-avatar>
       <view class="userInfoMask">
         <view class="userinfo-text">
           <text class="userinfo-nickname"> 欢迎您 ，👆 点我登陆 </text>

@@ -7,7 +7,7 @@ Page(Object.assign({}, {
     indicatorDots: true,
     loadingStatus: false, // loading
     loadingFinish: false,
-    shopLogo: 'https://cdn.it120.cc/apifactory/2018/06/10/527a0d6e3b3f1ffc32748193d743da26.jpg',
+    shopLogo: '',
     shopPrompt: [],
     shopDelivery: [],
     swiperCurrent: 0,
@@ -90,7 +90,9 @@ Page(Object.assign({}, {
     }
   },
   onShow: function () {
-    var that = this
+    this.setData({
+      shopLogo: app.globalData.shopLogo
+    })
   },
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {

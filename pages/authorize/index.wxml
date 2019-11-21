@@ -1,6 +1,6 @@
 <view class="container">
     <view class="my-content">
-      <wxc-avatar class="logo" src="https://cdn.it120.cc/apifactory/2018/06/10/527a0d6e3b3f1ffc32748193d743da26.jpg"> </wxc-avatar>
+      <wxc-avatar class="logo" src="{{shopLogo}}"> </wxc-avatar>
       <!--<view class="name">RaveList</view>-->
       <view class="tips">您暂未获取微信授权，将无法正常使用小程序的功能~如需要正常使用，请点击“授权登录”按钮，允许获得您的公开信息（昵称、头像等）</view>
       <wxc-button type="info" btn-style="margin-top:30rpx;width: 160px;height: 80rpx;line-height: 75rpx;border-radius: 10rpx;" open-type="getUserInfo"  bindgetuserinfo="bindGetUserInfo" value="授权登录"></wxc-button>

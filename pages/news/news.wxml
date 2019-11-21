@@ -1,0 +1,13 @@
+<import src="../../templates/wxParse/wxParse.wxml" />
+<view class="news" wx:if="{{ news.title }}">
+  <view class="news-detail-header">
+    <view class="news-detail-title">{{ news.title }}</view>
+    <view class="news-detail-changes">
+      <text>{{ news.author || '珍馨果园' }}</text>
+      <text>{{ news.dateUpdate || news.dateAdd }}</text>
+    </view>
+  </view>
+  <view class="htmlContent">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+</view>

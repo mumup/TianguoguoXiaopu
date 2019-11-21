@@ -239,7 +239,8 @@ App({
     userInfo: null,
     subDomain: "ad7a0080441d00a8289cb7d10ca5bfbe",// 商城后台个性域名tgg
     version: "2.0.6",
-    shareProfile: '   一流的服务，做超新鲜的水果' // 首页转发的时候术语
+    shareProfile: '   一流的服务，做超新鲜的水果', // 首页转发的时候术语
+    shopLogo: 'https://dcdn.it120.cc/2019/11/21/5abcac01-abc3-412a-ab58-10d9cd12d08f.jpg'
   }
   // 根据自己需要修改下单时候的模板消息内容设置，可增加关闭订单、收货时候模板消息提醒
 })

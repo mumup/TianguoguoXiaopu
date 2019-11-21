@@ -21,7 +21,8 @@ Page({
     networkStatus: true, //正常联网
     couponsStatus: 0,
     getCoupStatus: -1,
-    notLogin: false
+    notLogin: false,
+    cmsList: []
   },
   
   onPullDownRefresh: function () {
@@ -70,6 +71,7 @@ Page({
 
     that.getCouponsTitlePicStr();
     that.getCoupons();
+    this.getCmsList();
   },
   getCouponsTitlePicStr: function () {
     var that = this;
@@ -237,6 +239,21 @@ Page({
             content: res.data.code + res.data.msg,
             showCancel: false
           })
+        }
+      }
+    })
+  },
+
+  getCmsList: function () {
+    var that = this;
+    wx.request({
+      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/cms/news/list',
+      data: { pageSize: 10 },
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            cmsList: res.data.data
+          });
         }
       }
     })
