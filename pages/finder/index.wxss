@@ -260,6 +260,7 @@ page {
   object-fit: cover;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
+  height: 375rpx;
 }
 .card__title {
   color: #000;
